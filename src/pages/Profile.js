@@ -7,6 +7,8 @@ import axios from "axios";
 import MediaCard from "../components/MediaCard";
 import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -27,16 +29,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
-  menuButton: {
-    float: "right",
-    marginRight: theme.spacing(1),
-    boxShadow: "1px 10px 50px 1px rgba(0,0,0,0.5)",
-    "&:hover": {
-      transform: "scale(1.02)",
-      boxShadow: "10px 10px 50px 1px rgba(0,0,0,0.9)",
-      backgroundColor: "white",
-      color: "#FF0102",
-    },
+  fab: {
+    margin: theme.spacing(2),
+  },
+  absolute: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(3),
   },
 }));
 
@@ -83,15 +82,12 @@ export default function Profile() {
           </Grid>
         </Container>
       </main>
-      <IconButton
-        edge="start"
-        className={classes.menuButton}
-        color="inherit"
-        aria-label="menu"
-        href="/post-create"
-      >
-        <AddIcon />
-      </IconButton>
+
+      <Tooltip title="Add" aria-label="add" href="/post-create">
+        <Fab color="primary" className={classes.absolute}>
+          <AddIcon />
+        </Fab>
+      </Tooltip>
       {/* Footer */}
       <Footer />
       {/* End footer */}

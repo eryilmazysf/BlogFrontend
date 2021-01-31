@@ -42,7 +42,7 @@ export default function HomePage() {
   useEffect(() => {
     fetchData().then((res) => setMainPageData(res.data.results));
   }, []);
-  console.log("mainPageData", mainPageData);
+  //console.log("mainPageData", mainPageData);
 
   return (
     <React.Fragment>

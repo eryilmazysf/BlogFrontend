@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
@@ -55,10 +50,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PostCreate() {
-  const [value, setValue] = React.useState("p");
   const classes = useStyles();
   const history = useHistory();
+  const [value, setValue] = useState(0);
   const token = localStorage.getItem("token");
+
   async function create({ title, content, image, status }) {
     await axios
       .post(
@@ -67,7 +63,7 @@ export default function PostCreate() {
           title: title,
           content: content,
           image: image,
-          status: status,
+          status: value ? "d" : "p",
         },
         {
           headers: { Authorization: `Token ${token}` },
@@ -79,32 +75,21 @@ export default function PostCreate() {
       .catch((error) => console.log(error));
   }
 
-  useEffect(() => {
-    handleChange();
-  }, []);
-
   const formik = useFormik({
     initialValues: {
       title: "",
       content: "",
       image: "",
-      status: "p",
+      status: "",
     },
     validationSchema: postValidationSchema,
     onSubmit: (values) => {
-      const handleChange = (event, newValue) => {
-        setValue(newValue);
-      };
-      handleChange();
-      console.log(values);
       create(values);
     },
   });
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
-
-    formik.values.status = newValue;
-    console.log("onchange ici", formik.values.status);
   };
 
   return (
@@ -157,21 +142,15 @@ export default function PostCreate() {
               error={formik.errors.image}
               helperText={formik.errors.image}
             />
-
             <Tabs
               value={value}
               onChange={handleChange}
               indicatorColor="primary"
               textColor="primary"
               centered
-              required
-              // variant="standard"
-              // margin="normal"
-              // name="status"
-              // id="status"
             >
-              <Tab label="Publish" value="p" />
-              <Tab label="Draft" value="d" />
+              <Tab label="Publish" />
+              <Tab label="Draft" />
             </Tabs>
 
             <Button
