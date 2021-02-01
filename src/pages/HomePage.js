@@ -62,6 +62,7 @@ export default function HomePage() {
                   viewCount={post.get_view_count}
                   commentCount={post.get_comment_count}
                   slug={post.slug}
+                  status="p"
                 />
               </Grid>
             ))}

@@ -5,8 +5,8 @@ import Container from "@material-ui/core/Container";
 import Footer from "../components/Footer";
 import axios from "axios";
 import MediaCard from "../components/MediaCard";
-import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fab from "@material-ui/core/Fab";
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   absolute: {
-    position: "absolute",
+    position: "fixed",
     bottom: theme.spacing(2),
     right: theme.spacing(3),
   },
@@ -76,6 +76,7 @@ export default function Profile() {
                   viewCount={post.get_view_count}
                   commentCount={post.get_comment_count}
                   slug={post.slug}
+                  status={post.status}
                 />
               </Grid>
             ))}

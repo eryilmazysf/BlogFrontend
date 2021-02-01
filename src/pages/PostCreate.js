@@ -72,6 +72,7 @@ export default function PostCreate() {
       .then((data) => {
         console.log("new data", data);
       })
+      .then(() => history.push("/profile"))
       .catch((error) => console.log(error));
   }
 
@@ -80,7 +81,6 @@ export default function PostCreate() {
       title: "",
       content: "",
       image: "",
-      status: "",
     },
     validationSchema: postValidationSchema,
     onSubmit: (values) => {
