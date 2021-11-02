@@ -20,7 +20,7 @@ import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    height: "100%",
+    height: "350px",
     display: "flex",
     flexDirection: "column",
   },
